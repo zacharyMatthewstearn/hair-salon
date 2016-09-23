@@ -1,12 +1,12 @@
 # Hair Salon
 
-#### Salon Web App: Java/SQL Exercise for Epicodus, 9/23/2016
+#### Salon Web App: Java/Spark/PostgreSQL Exercise for Epicodus, 9/23/2016
 
 #### By Zachary Matthewstearn
 
 ## Description
 
-A web application written in Java and served with Spark, using Postgres databases, with which a user may input and store politicians and their stated goals, and review those politicians' progress on each of these goals.
+A web application written in Java and served with Spark, using Postgres databases, with which a user may input and store stylists and clients associated with those stylists at a hair salon.
 
 
 ## Setup/Installation Requirements
@@ -14,11 +14,14 @@ A web application written in Java and served with Spark, using Postgres database
 * _REQUIRED:_
   * _JRE/JDK_
   * _Gradle_
+  * _PostgreSQL_
 
 
-* _Clone this repository_
-* _Within the cloned directory, run the following command:_ $gradle run
-* _In your web browser of choice, navigate to:_ http://localhost:4567/
+* _In Bash:_
+  * _Clone this repository_
+  * _Within the cloned directory, run the following command:_ $psql hair_salon < hair_salon.sql
+  * _Within the cloned directory, run the following command:_ $gradle run
+  * _In your web browser of choice, navigate to:_ http://localhost:4567/
 
 
 ## Technologies Used

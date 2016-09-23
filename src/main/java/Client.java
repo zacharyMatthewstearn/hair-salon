@@ -3,10 +3,13 @@ import java.util.ArrayList;
 import org.sql2o.*;
 
 public class Client {
+  // Static Variables
+  private static int selectedId = 0;
   // Member Variables
   private int id;
   private int stylistId;
   private String name;
+  private String details;
 
   // Constructor
   public Client(int _stylistId, String _name) {
@@ -15,6 +18,12 @@ public class Client {
   }
 
   // Static Methods
+  public static int getSelectedId() {
+    return selectedId;
+  }
+  public static void setSelectedId(int _selectedId) {
+    selectedId = _selectedId;
+  }
   public static List<Client> getAll() {
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery("SELECT * FROM clients")
@@ -50,6 +59,9 @@ public class Client {
   public String getName() {
     return name;
   }
+  public String getDetails() {
+    return details;
+  }
 
   // Setters
   public void setStylistId(int _newStylistId) {
@@ -66,6 +78,15 @@ public class Client {
     try(Connection con = DB.sql2o.open()) {
       con.createQuery("UPDATE clients SET name = :name WHERE id = :id", true)
       .addParameter("name", name)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+  }
+  public void setDetails(String _newDetails) {
+    details = _newDetails;
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery("UPDATE clients SET details = :details WHERE id = :id", true)
+      .addParameter("details", details)
       .addParameter("id", id)
       .executeUpdate();
     }

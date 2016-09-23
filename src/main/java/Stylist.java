@@ -3,9 +3,12 @@ import java.util.ArrayList;
 import org.sql2o.*;
 
 public class Stylist {
+  // Static Variables
+  private static int selectedId = 0;
   // Member Variables
   private int id;
   private String name;
+  private String details;
 
   // Constructor
   public Stylist(String _name) {
@@ -13,6 +16,12 @@ public class Stylist {
   }
 
   // Static Methods
+  public static int getSelectedId() {
+    return selectedId;
+  }
+  public static void setSelectedId(int _selectedId) {
+    selectedId = _selectedId;
+  }
   public static List<Stylist> getAll() {
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery("SELECT * FROM stylists")
@@ -37,20 +46,32 @@ public class Stylist {
              name.equals(newStylist.getName());
   }
 
-  // Getters
+  // Non-Static Getters
   public int getId() {
     return id;
   }
   public String getName() {
     return name;
   }
+  public String getDetails() {
+    return details;
+  }
 
-  // Setters
+  // Non-Static Setters
   public void setName(String _newName) {
     name = _newName;
     try(Connection con = DB.sql2o.open()) {
       con.createQuery("UPDATE stylists SET name = :name WHERE id = :id", true)
       .addParameter("name", name)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+  }
+  public void setDetails(String _newDetails) {
+    details = _newDetails;
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery("UPDATE stylists SET details = :details WHERE id = :id", true)
+      .addParameter("details", details)
       .addParameter("id", id)
       .executeUpdate();
     }
@@ -67,6 +88,12 @@ public class Stylist {
   }
   public void delete() {
     try(Connection con = DB.sql2o.open()) {
+      List<Client> thisStylistsClients = con.createQuery("SELECT * FROM clients WHERE stylistId = :id")
+        .addParameter("id", id)
+        .executeAndFetch(Client.class);
+      for(Client client:thisStylistsClients){
+        client.delete();
+      }
       con.createQuery("DELETE FROM stylists WHERE id = :id")
         .addParameter("id", id)
         .executeUpdate();

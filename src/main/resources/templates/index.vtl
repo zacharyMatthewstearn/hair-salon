@@ -1,1 +1,97 @@
-<h1>TEST!</h1>
+<div class="row">
+  <div class="col col-md-6">
+    <div id="stylists-list">
+      <h2>Stylists</h2>
+      #if($stylists && $stylists.size() > 0)
+        <ul>
+          #foreach($stylist in $stylists)
+            #if($stylist.getId() == $selectedStylistId)
+              <li><a href="/stylists/$stylist.getId()"><strong>$stylist.getName()</strong></a></li>
+            #else
+              <li><a href="/stylists/$stylist.getId()">$stylist.getName()</a></li>
+            #end
+          #end
+        </ul>
+      #else
+        <p>No stylists yet!</p>
+      #end
+    </div>
+  </div>
+  <div class="col col-md-6">
+    <div id="clients-list">
+      <h2>Clients</h2>
+      #if($clients && $clients.size() > 0)
+        <ul>
+          #foreach($client in $clients)
+            #if($client.getId() == $selectedClientId)
+              <strong><li><a href="/clients/$client.getId()">$client.getName()</a></li></strong>
+            #else
+              <li><a href="/clients/$client.getId()">$client.getName()</a></li>
+            #end
+          #end
+        </ul>
+      #else
+        <p>No clients yet!</p>
+      #end
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col col-md-6">
+    <form id="stylistNames-form" class="form-group" name="stylistNameInput" action="/stylists/update" method="post">
+      <label for="stylistNameInput">Add or update a stylist's name:</label><br>
+      <input id="stylistNameInput" name="stylistNameInput" type="text" placeholder="enter name here" required>
+      <input type="hidden" name="hiddenStylistNameButton">
+      <label>
+        <input type="submit" value="Add" onclick="this.form.hiddenStylistNameButton.value=this.value;this.form.action='/stylists/update';this.form.submit();">
+        #if($selectedStylistId > 0)
+          <input type="submit" value="Update" onclick="this.form.hiddenStylistNameButton.value=this.value;this.form.action='/stylists/update';this.form.submit();">
+          <input type="submit" value="Delete" onclick="this.form.hiddenStylistNameButton.value=this.value;this.form.action='/stylists/update';this.form.submit();">
+        #end
+      </label>
+    </form>
+    <!-- #if($selectedStylistId > 0)
+      <br>
+      <form id="stylistDetails-form" class="form-group" name="stylistDetailsInput" action="/stylists/update" method="post">
+        <label for="stylistDetailsInput">Add or update a stylist's details:</label><br>
+        <input id="stylistDetailsInput" name="stylistDetailsInput" type="text" placeholder="enter name here" required>
+        <input type="hidden" name="hiddenStylistDetailsButton">
+        <label>
+          <input type="submit" value="Add" onclick="this.form.hiddenStylistDetailsButton.value=this.value;this.form.action='/stylists/update';this.form.submit();">
+            <input type="submit" value="Update" onclick="this.form.hiddenStylistDetailsButton.value=this.value;this.form.action='/stylists/update';this.form.submit();">
+            <input type="submit" value="Delete" onclick="this.form.hiddenStylistDetailsButton.value=this.value;this.form.action='/stylists/update';this.form.submit();">
+        </label>
+      </form>
+    #end -->
+  </div>
+  <div class="col col-md-6">
+    #if($selectedStylistId > 0)
+      <form id="clients-form" class="form-group" name="clientInput" action="/clients/update" method="post">
+        <label for="clientNameInput">Add or update a client's name:</label><br>
+        <input id="clientNameInput" name="clientNameInput" type="text" placeholder="enter a client here" required>
+        <input type="hidden" name="hiddenClientNameButton">
+        <label>
+          <input type="submit" value="Add" onclick="this.form.hiddenClientNameButton.value=this.value;this.form.action='/clients/update';this.form.submit();">
+          #if($selectedClientId > 0)
+            <input type="submit" value="Update" onclick="this.form.hiddenClientNameButton.value=this.value;this.form.action='/clients/update';this.form.submit();">
+            <input type="submit" value="Delete" onclick="this.form.hiddenClientNameButton.value=this.value;this.form.action='/clients/update';this.form.submit();">
+          #end
+        </label>
+      </form>
+      <!-- #if($selectedClientId > 0)
+        <br>
+        <form id="clientDetails-form" class="form-group" name="clientDetailsInput" action="/clients/update" method="post">
+          <label for="clientDetailsInput">Add or update a client's details:</label><br>
+          <input id="clientDetailsInput" name="clientDetailsInput" type="text" placeholder="enter name here" required>
+          <input type="hidden" name="hiddenClientDetailsButton">
+          <label>
+            <input type="submit" value="Add" onclick="this.form.hiddenClientDetailsButton.value=this.value;this.form.action='/clients/update';this.form.submit();">
+              <input type="submit" value="Update" onclick="this.form.hiddenClientDetailsButton.value=this.value;this.form.action='/clients/update';this.form.submit();">
+              <input type="submit" value="Delete" onclick="this.form.hiddenClientDetailsButton.value=this.value;this.form.action='/clients/update';this.form.submit();">
+          </label>
+        </form>
+      #end -->
+    #end
+  </div>
+</div>
