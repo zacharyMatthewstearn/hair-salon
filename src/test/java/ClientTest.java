@@ -85,5 +85,12 @@ public class ClientTest {
     testClient.setName("Barry Bluejeans");
     assertEquals(null, Client.getById(1));
   }
+  @Test
+  public void setName_changesNameAppropriately_String() {
+    Client testClient = new Client(1, "Taako");
+    testClient.save();
+    testClient.setName("Barry Bluejeans");
+    assertTrue(Client.getById(testClient.getId()).getName().equals("Barry Bluejeans"));
+  }
 
 }
