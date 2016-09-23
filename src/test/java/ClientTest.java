@@ -5,10 +5,12 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 public class ClientTest {
-
+  // Rules
   @Rule
   public DatabaseRule databaseRule = new DatabaseRule();
 
+  // Tests
+  //// save
   @Test
   public void save_savesClientToDatabase_true() {
     Client testClient = new Client(1, "Taako");
@@ -16,6 +18,7 @@ public class ClientTest {
     assertTrue(testClient.getId() > 0);
   }
 
+  //// equals
   @Test
   public void equals_returnsFalseWhenUnequal_false() {
     Client testClient1 = new Client(1, "Magnus");
@@ -33,6 +36,7 @@ public class ClientTest {
     assertTrue(testClient1.equals(testClient2));
   }
 
+  //// getById
   @Test
   public void getById_returnsNullIfClientNotInDB_null() {
     Client testClient = new Client(1, "Taako");
@@ -45,6 +49,27 @@ public class ClientTest {
     assertTrue(Client.getById(testClient.getId()).equals(testClient));
   }
 
+  //// getAll
+  @Test
+  public void getAll_returnsEmpyListIfNoClientsInDB_ListClient() {
+    assertTrue(Client.getAll().size() == 0);
+  }
+  // @Test
+  // public void getAll_fetchesAllClientsFromDB_ListClient() {
+  //   Client testClient1 = new Client(1, "Merle");
+  //   testClient1.save();
+  //   Client testClient2 = new Client(1, "Magnus");
+  //   testClient1.save();
+  //   assertTrue(Client.getAll().get(0).equals(testClient2));
+  // }
+
+  //// delete
+  @Test
+  public void delete_doesNotCrashIfClientIsNotInDB_null() {
+    Client testClient = new Client(1, "Taako");
+    testClient.delete();
+    assertEquals(null, Client.getById(testClient.getId()));
+  }
   @Test
   public void delete_removesClientFromDatabase_null() {
     Client testClient = new Client(1, "Taako");
