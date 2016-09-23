@@ -24,14 +24,14 @@ public class ClientTest {
     testClient2.save();
     assertTrue(!testClient1.equals(testClient2));
   }
-  // @Test
-  // public void equals_returnsTrueWhenEqual_true() {
-  //   Client testClient1 = new Client(1, "Taako");
-  //   testClient1.save();
-  //   Client testClient2 = testClient1;
-  //   testClient2.save();
-  //   assertTrue(testClient1.equals(testClient2));
-  // }
+  @Test
+  public void equals_returnsTrueWhenEqual_true() {
+    Client testClient1 = new Client(1, "Taako");
+    testClient1.save();
+    Client testClient2 = testClient1;
+    testClient2.save();
+    assertTrue(testClient1.equals(testClient2));
+  }
 
   // @Test
   // public void getById_fetchesCorrectClientFromDB_Client() {
