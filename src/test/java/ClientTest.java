@@ -54,14 +54,14 @@ public class ClientTest {
   public void getAll_returnsEmpyListIfNoClientsInDB_ListClient() {
     assertTrue(Client.getAll().size() == 0);
   }
-  // @Test
-  // public void getAll_fetchesAllClientsFromDB_ListClient() {
-  //   Client testClient1 = new Client(1, "Merle");
-  //   testClient1.save();
-  //   Client testClient2 = new Client(1, "Magnus");
-  //   testClient1.save();
-  //   assertTrue(Client.getAll().get(0).equals(testClient2));
-  // }
+  @Test
+  public void getAll_fetchesAllClientsFromDB_ListClient() {
+    Client testClient1 = new Client(1, "Merle");
+    testClient1.save();
+    Client testClient2 = new Client(1, "Magnus");
+    testClient2.save();
+    assertTrue(Client.getAll().get(1).equals(testClient2));
+  }
 
   //// delete
   @Test
