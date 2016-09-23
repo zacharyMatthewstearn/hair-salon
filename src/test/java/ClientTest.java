@@ -78,4 +78,12 @@ public class ClientTest {
     assertEquals(null, Client.getById(testClient.getId()));
   }
 
+  //// setName
+  @Test
+  public void setName_doesNotCrashIfClientIsNotInDB_null() {
+    Client testClient = new Client(1, "Taako");
+    testClient.setName("Barry Bluejeans");
+    assertEquals(null, Client.getById(1));
+  }
+
 }

@@ -52,7 +52,18 @@ public class Client {
   }
 
   // Setters
-
+  public void setStylistId(int _newStylistId) {
+    stylistId = _newStylistId;
+  }
+  public void setName(String _newName) {
+    name = _newName;
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery("UPDATE clients SET name = :name WHERE id = :id", true)
+      .addParameter("name", name)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+  }
 
   // Other Non-Static Methods
   public void save() {
