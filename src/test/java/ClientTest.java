@@ -40,12 +40,12 @@ public class ClientTest {
     assertTrue(Client.getById(testClient.getId()).equals(testClient));
   }
 
-  // @Test
-  // public void delete_removesClientFromDatabase_null() {
-  //   Client testClient = new Client(1, "Taako");
-  //   testClient.save();
-  //   testClient.delete();
-  //   assertEquals(null, Client.findById(testClient.getId()));
-  // }
+  @Test
+  public void delete_removesClientFromDatabase_null() {
+    Client testClient = new Client(1, "Taako");
+    testClient.save();
+    testClient.delete();
+    assertEquals(null, Client.getById(testClient.getId()));
+  }
 
 }
