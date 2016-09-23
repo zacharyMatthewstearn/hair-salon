@@ -34,6 +34,11 @@ public class ClientTest {
   }
 
   @Test
+  public void getById_returnsNullIfClientNotInDB_null() {
+    Client testClient = new Client(1, "Taako");
+    assertEquals(null, Client.getById(testClient.getId()));
+  }
+  @Test
   public void getById_fetchesCorrectClientFromDB_Client() {
     Client testClient = new Client(1, "Taako");
     testClient.save();
