@@ -33,12 +33,13 @@ public class ClientTest {
     assertTrue(testClient1.equals(testClient2));
   }
 
-  // @Test
-  // public void getById_fetchesCorrectClientFromDB_Client() {
-  //   Client testClient = new Client(1, "Taako");
-  //   testClient.save();
-  //   assertTrue(Client.getById(2).equals(testClient));
-  // }
+  @Test
+  public void getById_fetchesCorrectClientFromDB_Client() {
+    Client testClient = new Client(1, "Taako");
+    testClient.save();
+    assertTrue(Client.getById(testClient.getId()).equals(testClient));
+  }
+
   // @Test
   // public void delete_removesClientFromDatabase_null() {
   //   Client testClient = new Client(1, "Taako");
