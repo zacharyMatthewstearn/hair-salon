@@ -54,6 +54,12 @@ public class Client {
   // Setters
   public void setStylistId(int _newStylistId) {
     stylistId = _newStylistId;
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery("UPDATE clients SET stylistId = :stylistId WHERE id = :id", true)
+      .addParameter("stylistId", stylistId)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
   }
   public void setName(String _newName) {
     name = _newName;

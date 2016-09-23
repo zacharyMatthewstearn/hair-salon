@@ -90,7 +90,24 @@ public class ClientTest {
     Client testClient = new Client(1, "Taako");
     testClient.save();
     testClient.setName("Barry Bluejeans");
-    assertTrue(Client.getById(testClient.getId()).getName().equals("Barry Bluejeans"));
+    assertTrue("DB", Client.getById(testClient.getId()).getName().equals("Barry Bluejeans"));
+    assertTrue("Member variable", testClient.getName().equals("Barry Bluejeans"));
   }
+
+  //// setStylistId
+  @Test
+  public void setStylistId_doesNotCrashIfClientIsNotInDB_null() {
+    Client testClient = new Client(1, "Taako");
+    testClient.setStylistId(2);
+    assertEquals(null, Client.getById(1));
+  }
+  // @Test
+  // public void setStylistId_changesStylistIdAppropriately_String() {
+  //   Client testClient = new Client(1, "Taako");
+  //   testClient.save();
+  //   testClient.setStylistId(2);
+  //   assertTrue("DB", Client.getById(testClient.getId()).getStylistId() == 2);
+  //   assertTrue("Member variable", testClient.getStylistId() == 2);
+  // }
 
 }
